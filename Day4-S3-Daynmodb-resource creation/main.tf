@@ -7,6 +7,13 @@ resource "aws_s3_bucket" "dev" {
   bucket = "oneplus98"
 }
 
+resource "aws_s3_bucket_versioning" "versioning_example" {
+  bucket = aws_s3_bucket.dev.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
 resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
   name = "terraform-state-lock-dynamo-db"
   hash_key = "LockID"
